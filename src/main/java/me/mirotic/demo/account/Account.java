@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
+@DynamicUpdate
 @Getter
 @ToString
 @NoArgsConstructor
@@ -32,6 +34,10 @@ public class Account {
         this.username = username;
         this.dormant = Boolean.FALSE;
         this.created = LocalDateTime.now();
+    }
+
+    public void inactive() {
+        this.dormant = Boolean.TRUE;
     }
 
 }
