@@ -25,19 +25,19 @@ public class Account {
 
     private String username;
 
-    private Boolean dormant;
+    private Boolean inactive;
 
-    private LocalDateTime created;
+    private LocalDateTime updated;
 
     @Builder
     private Account(String username) {
         this.username = username;
-        this.dormant = Boolean.FALSE;
-        this.created = LocalDateTime.now();
+        this.inactive = Boolean.FALSE;
+        this.updated = LocalDateTime.now();
     }
 
     public void inactive() {
-        this.dormant = Boolean.TRUE;
+        this.inactive = Boolean.TRUE;
     }
 
 }

@@ -25,7 +25,7 @@ class AccountRepositoryTest {
 
         assertThat(account.getId()).isNotNull();
         assertThat(account.getUsername()).isEqualTo(username);
-        assertThat(account.getDormant()).isFalse();
-        assertThat(account.getCreated()).isBefore(LocalDateTime.now());
+        assertThat(account.getInactive()).isFalse();
+        assertThat(account.getUpdated()).isBefore(LocalDateTime.now());
     }
 }

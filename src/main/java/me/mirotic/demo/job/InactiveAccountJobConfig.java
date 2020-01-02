@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class DormantTransitionJobConfig {
+public class InactiveAccountJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
@@ -27,8 +27,8 @@ public class DormantTransitionJobConfig {
 
 
     @Bean
-    public Job job() {
-        return jobBuilderFactory.get("dormantTransitionJob")
+    public Job inactiveAccountJob() {
+        return jobBuilderFactory.get("inactiveAccountJob")
                 .start(createAccountStep())
                 .next(inactiveAccountStep())
                 .build();
@@ -64,7 +64,7 @@ public class DormantTransitionJobConfig {
                 .tasklet((contribution, chunkContext) -> {
                     log.info(">>> inactiveAccountStep Start");
 
-                    List<Account> all = accountRepository.findAllByCreatedBefore(LocalDateTime.now());
+                    List<Account> all = accountRepository.findAllByUpdatedBefore(LocalDateTime.now());
                     all.forEach(account -> {
                         account.inactive();
                         accountRepository.save(account);
