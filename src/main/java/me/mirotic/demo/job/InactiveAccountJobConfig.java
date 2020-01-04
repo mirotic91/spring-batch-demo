@@ -64,7 +64,7 @@ public class InactiveAccountJobConfig {
                 .tasklet((contribution, chunkContext) -> {
                     log.info(">>> inactiveAccountStep Start");
 
-                    List<Account> all = accountRepository.findAllByUpdatedBefore(LocalDateTime.now());
+                    List<Account> all = accountRepository.findAllByInactiveIsFalseAndUpdatedBefore(LocalDateTime.now());
                     all.forEach(account -> {
                         account.inactive();
                         accountRepository.save(account);

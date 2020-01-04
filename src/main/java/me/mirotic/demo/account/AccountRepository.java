@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    List<Account> findAllByUpdatedBefore(LocalDateTime localDateTime);
+    List<Account> findAllByInactiveIsFalseAndUpdatedBefore(LocalDateTime localDateTime);
 }
